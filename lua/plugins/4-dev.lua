@@ -27,6 +27,9 @@
 --       -> copilot                        [github code suggestions]
 --       -> guess-indent                   [guess-indent]
 
+--       ## RAILS
+--       -> vim-rails                      [rails editing]
+
 --       ## COMPILER
 --       -> compiler.nvim                  [compiler]
 --       -> overseer.nvim                  [task runner]
@@ -221,7 +224,7 @@ return {
     config = function(_, opts)
       require("aerial").setup(opts)
       -- HACK: The first time you open aerial on a session, close all folds.
-      vim.api.nvim_create_autocmd({"FileType", "BufEnter"}, {
+      vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
         desc = "Aerial: When aerial is opened, close all its folds.",
         callback = function()
           local is_aerial = vim.bo.filetype == "aerial"
@@ -245,8 +248,8 @@ return {
     opts = {
       notify = { enabled = false },
       panel = {
-          orientation = "bottom",
-          panel_size = 10,
+        orientation = "bottom",
+        panel_size = 10,
       },
     },
     config = function(_, opts)
@@ -279,8 +282,10 @@ return {
               vim.wo.colorcolumn = "0"
               vim.wo.foldcolumn = "0"
               vim.cmd("silent! PinBuffer") -- stickybuf.nvim
-              vim.cmd("silent! hi LTSymbolJump ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
-              vim.cmd("silent! hi LTSymbolJumpRefs ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
+              vim.cmd(
+              "silent! hi LTSymbolJump ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
+              vim.cmd(
+              "silent! hi LTSymbolJumpRefs ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
             else
               vim.cmd("silent! highlight clear LTSymbolJump")
               vim.cmd("silent! highlight clear LTSymbolJumpRefs")
@@ -383,6 +388,9 @@ return {
       }
     end,
   },
+
+  -- [vim-rails]
+  "tpope/vim-rails",
 
   --  COMPILER ----------------------------------------------------------------
   --  compiler.nvim [compiler]
@@ -643,8 +651,8 @@ return {
           type = 'kotlin',
           request = 'launch',
           name = 'Launch kotlin program',
-          projectRoot = "${workspaceFolder}/app",     -- ensure this is correct
-          mainClass = "AppKt",                        -- ensure this is correct
+          projectRoot = "${workspaceFolder}/app", -- ensure this is correct
+          mainClass = "AppKt",                    -- ensure this is correct
         },
       }
 
@@ -765,6 +773,12 @@ return {
       "jay-babu/mason-nvim-dap.nvim",
       "jbyuki/one-small-step-for-vimkind",
       "nvim-java/nvim-java",
+      {
+        "suketa/nvim-dap-ruby",
+        config = function()
+          require("dap-ruby").setup()
+        end
+      }
     },
   },
 
@@ -840,6 +854,7 @@ return {
       "rcasia/neotest-java",
       "nvim-neotest/neotest-jest",
       "olimorris/neotest-phpunit",
+      "olimorris/neotest-rspec",
       "nvim-neotest/neotest-python",
       "rouge8/neotest-rust",
       "lawrence-laz/neotest-zig",
@@ -853,6 +868,7 @@ return {
           require("neotest-elixir"),
           require("neotest-go"),
           require("neotest-java"),
+          require("neotest-rspec"),
           require("neotest-jest"),
           require("neotest-phpunit"),
           require("neotest-python"),

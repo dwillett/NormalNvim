@@ -41,6 +41,21 @@ return {
     }
   },
 
+  -- catppuccin [theme]
+  -- https://github.com/catppuccin/nvim
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    event = "User LoadColorSchemes",
+    opts = {
+      dim_inactive = {
+        enabled = true,
+        percentage = 0.30,
+      },
+    }
+  },
+
   --  astrotheme [theme]
   --  https://github.com/AstroNvim/astrotheme
   {
@@ -129,36 +144,28 @@ return {
           [[  \/__/    \/_/\/_/\/_/\/_/]],
         }
       else
-        dashboard.section.header.val = {
-          [[888b      88                                                           88]],
-          [[8888b     88                                                           88]],
-          [[88 `8b    88                                                           88]],
-          [[88  `8b   88   ,adPPYba,   8b,dPPYba,  88,dPYba,,adPYba,   ,adPPYYba,  88]],
-          [[88   `8b  88  a8"     "8a  88P'   "Y8  88P'   "88"    "8a  ""     `Y8  88]],
-          [[88    `8b 88  8b       d8  88          88      88      88  ,adPPPPP88  88]],
-          [[88     `8888  "8a,   ,a8"  88          88      88      88  88,    ,88  88]],
-          [[88      `888   `"YbbdP"'   88          88      88      88  `"8bbdP"Y8  88]],
-          [[                                    __                ]],
-          [[                      ___   __  __ /\_\    ___ ___    ]],
-          [[                    /' _ `\/\ \/\ \\/\ \ /' __` __`\  ]],
-          [[                    /\ \/\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-          [[                    \ \_\ \_\ \___/  \ \_\ \_\ \_\ \_\]],
-          [[                     \/_/\/_/\/__/    \/_/\/_/\/_/\/_/]],
-        }
+       dashboard.section.header.val = {
+         '                    ▟▙            ',
+         '                    ▝▘            ',
+         '██▃▅▇█▆▖  ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+         '██▛▔ ▝██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+         '██    ██   ▜█▙▟█▛   ██  ██  ██  ██',
+         '██    ██   ▝████▘   ██  ██  ██  ██',
+         '▀▀    ▀▀     ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+       }
       end
-
       dashboard.section.header.opts.hl = "DashboardHeader"
       vim.cmd "highlight DashboardHeader guifg=#F7778F"
 
       -- If on windows, don't show the 'ranger' button
-      local ranger_button = dashboard.button("r", "🐍 Ranger  ", "<cmd>RnvimrToggle<CR>")
-      if is_windows then ranger_button = nil end
+      -- local ranger_button = dashboard.button("r", "🐍 Ranger  ", "<cmd>RnvimrToggle<CR>")
+      -- if is_windows then ranger_button = nil end
 
       -- Buttons
       dashboard.section.buttons.val = {
         dashboard.button("n", "📄 New     ", "<cmd>ene<CR>"),
         dashboard.button("e", "🌺 Recent  ", "<cmd>Telescope oldfiles<CR>"),
-        ranger_button,
+        -- ranger_button,
         dashboard.button(
           "s",
           "🔎 Sessions",
@@ -332,22 +339,22 @@ return {
           {
             condition = function() return not lib.condition.is_active() end,
             {
-              lib.component.neotree(),
-              lib.component.compiler_play(),
+              -- lib.component.neotree(),
+              -- lib.component.compiler_play(),
               lib.component.fill(),
-              lib.component.compiler_build_type(),
-              lib.component.compiler_redo(),
+              -- lib.component.compiler_build_type(),
+              -- lib.component.compiler_redo(),
               lib.component.aerial(),
             },
           },
           -- Regular winbar
           {
-            lib.component.neotree(),
-            lib.component.compiler_play(),
+            -- lib.component.neotree(),
+            -- lib.component.compiler_play(),
             lib.component.fill(),
             lib.component.breadcrumbs(),
             lib.component.fill(),
-            lib.component.compiler_redo(),
+            -- lib.component.compiler_redo(),
             lib.component.aerial(),
           }
         },
