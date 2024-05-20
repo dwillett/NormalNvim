@@ -28,20 +28,19 @@ local is_windows = vim.fn.has('win32') == 1         -- true if on windows
 local is_android = vim.fn.isdirectory('/data') == 1 -- true if on android
 
 return {
+  -- mini.files
   {
     "echasnovski/mini.files",
     event = "User BaseDefered",
     opts = {
-      mappings = {
-        go_in = "i",
+      mapping = {
+        go_in = "<Right>",
         go_in_plus = "<CR>",
-        go_out = "m",
-        go_out_plus = "M",
-      },
-      options = {
-        use_as_default_explorer = false,
+        go_out = "<Left>",
+        go_out_plus = "<S-Left>",
       }
     },
+    config = function(_, opts) require("mini.files").setup(opts) end
   },
   -- project.nvim [project search + auto cd]
   -- https://github.com/ahmedkhalf/project.nvim
